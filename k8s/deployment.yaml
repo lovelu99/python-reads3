@@ -23,6 +23,6 @@ spec:
             - name: AWS_REGION
               value: "us-east-2"
             - name: S3_BUCKET_NAME
-              value: "my-app-bucket"
+              value: "shefat"
             - name: S3_FILE_KEY
-              value: "data/file.txt"
+              value: "data/test.txt"
