@@ -4,7 +4,7 @@ metadata:
   name: s3-gallery
   namespace: default
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
       app: s3-gallery
