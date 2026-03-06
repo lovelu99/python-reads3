@@ -33,12 +33,12 @@ pipeline {
                 sh 'docker rmi ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKERHUB_REPO}:${IMAGE_TAG} || true'
             }
         }
-        stage('Trigger Kubernetes Deployment') {
-            steps {
-                echo 'Updating argo cd repository...'
-                build job: 'deployment', parameters: [string(name: 'IMAGE_TAG', value: "${IMAGE_TAG}")]
-            }
-        }
+        // stage('Trigger Kubernetes Deployment') {
+        //     steps {
+        //         echo 'Updating argo cd repository...'
+        //         build job: 'deployment', parameters: [string(name: 'IMAGE_TAG', value: "${IMAGE_TAG}")]
+        //     }
+        // }
         stage('Clean workspace') {
             steps {
                 echo 'Cleaning up workspace...'
