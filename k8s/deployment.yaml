@@ -18,7 +18,7 @@ spec:
 
       containers:
         - name: app
-          image: noakhali/reads3:5
+          image: noakhali/reads3:7
           env:
             - name: AWS_REGION
               value: "us-east-2"
