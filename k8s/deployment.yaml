@@ -16,7 +16,7 @@ spec:
       serviceAccountName: my-app-sa
       containers:
         - name: s3-gallery
-          image: noakhali/reads3:8   
+          image: noakhali/reads3:10   
           ports:
             - containerPort: 5000
           env:
