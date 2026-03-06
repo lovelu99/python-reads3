@@ -1,0 +1,28 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-s3-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-s3-app
+  template:
+    metadata:
+      labels:
+        app: my-s3-app
+    spec:
+      serviceAccountName: my-app-sa    # 👈 attach service account
+
+      containers:
+        - name: app
+          image: noakhali/reads3:5
+          env:
+            - name: AWS_REGION
+              value: "us-east-2"
+            - name: S3_BUCKET_NAME
+              value: "my-app-bucket"
+            - name: S3_FILE_KEY
+              value: "data/file.txt"
