@@ -1,28 +1,40 @@
-# deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-s3-app
+  name: s3-gallery
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-s3-app
+      app: s3-gallery
   template:
     metadata:
       labels:
-        app: my-s3-app
+        app: s3-gallery
     spec:
-      serviceAccountName: my-app-sa    # 👈 attach service account
-
+      serviceAccountName: my-app-sa
       containers:
-        - name: app
-          image: noakhali/reads3:7
+        - name: s3-gallery
+          image: noakhali/reads3:8   
+          ports:
+            - containerPort: 5000
           env:
             - name: AWS_REGION
               value: "us-east-2"
             - name: S3_BUCKET_NAME
               value: "shefat"
-            - name: S3_FILE_KEY
-              value: "data/test.txt"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: s3-gallery-svc
+  namespace: default
+spec:
+  selector:
+    app: s3-gallery
+  ports:
+    - port: 80
+      targetPort: 5000
+  type: LoadBalancer
